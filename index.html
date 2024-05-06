@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="styles.css"
+</head>
+<body>
+    <div id="menu"></div>
+
+    <script>
+        const dishes = [
+            {
+                name: "Buzza",
+                ingredients: ['dough', 'meat', 'onions']
+            },
+            {
+                name: "Pies",
+                ingredients: ['dough', 'meat', 'onions', 'potato'],
+            },
+            {
+                name: "Pizza",
+                ingredients: ['dough', 'pepperoni', 'tomatoes', 'cheese']
+            },
+            {
+                name: "Salad",
+                ingredients: ['tomatoes', 'cucumbers']
+            }
+        ];
+
+        
+        const menuContainer = document.getElementById("menu");
+
+        
+        dishes.forEach(dish => {
+            const dishElement = document.createElement("div");
+            
+            dishElement.innerHTML = `<h3>${dish.name}</h3>
+                                     <p>Ингредиенты: ${dish.ingredients.join(", ")}</p>`;
+
+            menuContainer.appendChild(dishElement);
+        });
+    </script>
+</body>
+</html>

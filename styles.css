@@ -1,0 +1,27 @@
+/* Стили для контейнера меню */
+#menu {
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    font-family: Arial, sans-serif;
+}
+
+/* Стили для каждого блюда */
+#menu div {
+    margin-bottom: 20px; 
+    padding: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Стили для названия блюда */
+#menu div h3 {
+    margin-top: 0;
+}
+
+/* Стили для списка ингредиентов */
+#menu div p {
+    margin-top: 5px; 
+    color: #666;
+}
