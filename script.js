@@ -50,7 +50,7 @@ console.log(dishesWithCost);
 //3.Используем метод some для определения, есть ли в меню хоть одно вегетарианское блюдо
 const hasVegetarianDish = dishes.some(dish => {
     // Проверяем, содержит ли блюдо хотя бы один ингредиент, который не является мясом
-    return dish.ingredients.some(ingredient => ingredient !== 'meat');
+    return dish.ingredients.some(ingredient => ingredient !== 'meat' && ingredient !== 'dought' && ingredient !== 'cheese');
 });
 
 // Выводим результат
