@@ -28,15 +28,15 @@ const ingredientPrices = {
     cucumbers: 1
 };
 
-// Добавляем массив с невегетарианскими ингредиентами
+// 1.Добавляем массив с невегетарианскими ингредиентами
 const nonVegetarianIngredients = ['meat', 'pepperoni'];
 
-// Функция для вычисления себестоимости блюда
+// 2.Функция для вычисления себестоимости блюда
 const calculateCost = (ingredients) => {
     return ingredients.reduce((acc, ingredient) => acc + ingredientPrices[ingredient], 0);
 };
 
-// Используем map для обновления массива dishes
+// 3.Используем map для обновления массива dishes
 const updatedDishes = dishes.map(dish => ({
     ...dish,
     costOfPreparation: calculateCost(dish.ingredients)
@@ -44,7 +44,7 @@ const updatedDishes = dishes.map(dish => ({
 
 console.log(updatedDishes);
 
-// Используем map, чтобы получить массив объектов с названием и стоимостью каждого блюда
+// 4.Используем map, чтобы получить массив объектов с названием и стоимостью каждого блюда
 const dishesWithCost = updatedDishes.map(dish => ({
     name: dish.name,
     costOfPreparation: dish.costOfPreparation
@@ -52,34 +52,34 @@ const dishesWithCost = updatedDishes.map(dish => ({
 
 console.log(dishesWithCost);
 
-// Используем some для определения, есть ли в меню хотя бы одно вегетарианское блюдо
+// 5.Используем some для определения, есть ли в меню хотя бы одно вегетарианское блюдо
 const hasVegetarianDish = dishes.some(dish => 
     dish.ingredients.every(ingredient => !nonVegetarianIngredients.includes(ingredient))
 );
 
-// Выводим результат
+// 6.Выводим результат
 if (hasVegetarianDish) {
     console.log("в меню есть хотя бы одно вегетарианское блюдо.");
 } else {
     console.log("в меню нет вегетарианских блюд.");
 }
 
-// Используем every для определения, полностью ли у нас вегетарианское меню
+// 7.Используем every для определения, полностью ли у нас вегетарианское меню
 const isFullyVegetarianMenu = dishes.every(dish => 
     dish.ingredients.every(ingredient => !nonVegetarianIngredients.includes(ingredient))
 );
 
-// Выводим результат
+// 8.Выводим результат
 if (isFullyVegetarianMenu) {
     console.log("полностью вегетарианское меню.");
 } else {
     console.log("не полностью вегетарианское меню.");
 }
 
-// Используем filter для создания массива с вегетарианскими блюдами
+// 9.Используем filter для создания массива с вегетарианскими блюдами
 const vegetarianDishes = dishes.filter(dish => 
     dish.ingredients.every(ingredient => !nonVegetarianIngredients.includes(ingredient))
 );
 
-// Выводим результат
+// 10.Выводим результат
 console.log("Вегетарианские блюда:", vegetarianDishes);
