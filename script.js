@@ -1,4 +1,3 @@
-//Используем данные с прошлого заданий.
 const dishes = [
     {
         name: "Buzza",
@@ -14,7 +13,7 @@ const dishes = [
     },
     {
         name: "Salad",
-        ingredient: ['tomatoes', 'cucumbers']
+        ingredients: ['tomatoes', 'cucumbers']
     }
 ];
 
@@ -29,29 +28,34 @@ const ingredientPrices = {
     cucumbers: 1
 };
 
-//1. Используем reduce для вычисления общей стоимости приготовления блюда.
-const updatedDishes = dishes.map(dish => {
-    const costOfPreparation = dish.ingredients.reduce((acc, ingredient) => {
-        return acc + ingredientPrices[ingredient];
-    }, 0);
-    return {...dish, costOfPreparation};
-});
+// Добавляем массив с невегетарианскими ингредиентами
+const nonVegetarianIngredients = ['meat', 'pepperoni'];
+
+// Функция для вычисления себестоимости блюда
+const calculateCost = (ingredients) => {
+    return ingredients.reduce((acc, ingredient) => acc + ingredientPrices[ingredient], 0);
+};
+
+// Используем map для обновления массива dishes
+const updatedDishes = dishes.map(dish => ({
+    ...dish,
+    costOfPreparation: calculateCost(dish.ingredients)
+}));
 
 console.log(updatedDishes);
 
-
-// 2.Используем map, чтобы получить массив объектов с названием и стоимостью каждого блюда
-const dishesWithCost = updatedDishes.map(dish => {
-    return { name: dish.name, costOfPreparation: dish.costOfPreparation };
-});
+// Используем map, чтобы получить массив объектов с названием и стоимостью каждого блюда
+const dishesWithCost = updatedDishes.map(dish => ({
+    name: dish.name,
+    costOfPreparation: dish.costOfPreparation
+}));
 
 console.log(dishesWithCost);
 
-//3.Используем метод some для определения, есть ли в меню хоть одно вегетарианское блюдо
-const hasVegetarianDish = dishes.some(dish => {
-    // Проверяем, содержит ли блюдо хотя бы один ингредиент, который не является мясом
-    return dish.ingredients.some(ingredient => ingredient !== 'meat');
-});
+// Используем some для определения, есть ли в меню хотя бы одно вегетарианское блюдо
+const hasVegetarianDish = dishes.some(dish => 
+    dish.ingredients.every(ingredient => !nonVegetarianIngredients.includes(ingredient))
+);
 
 // Выводим результат
 if (hasVegetarianDish) {
@@ -60,11 +64,10 @@ if (hasVegetarianDish) {
     console.log("в меню нет вегетарианских блюд.");
 }
 
-//4.Используем метод every для определения, полностью ли у нас вегетарианское меню
-const isFullyVegetarianMenu = dishes.every(dish => {
-    // Проверяем, все ли ингредиенты в блюде являются вегетарианскими
-    return dish.ingredients.every(ingredient => ingredient !== 'meat');
-});
+// Используем every для определения, полностью ли у нас вегетарианское меню
+const isFullyVegetarianMenu = dishes.every(dish => 
+    dish.ingredients.every(ingredient => !nonVegetarianIngredients.includes(ingredient))
+);
 
 // Выводим результат
 if (isFullyVegetarianMenu) {
@@ -73,11 +76,10 @@ if (isFullyVegetarianMenu) {
     console.log("не полностью вегетарианское меню.");
 }
 
-//5.Используем метод filter для создания массива с вегетарианскими блюдами
-const vegetarianDishes = dishes.filter(dish => {
-    // Фильтруем только те блюда, у которых все ингредиенты являются вегетарианскими
-    return dish.ingredients.every(ingredient => ingredient !== 'meat');
-});
+// Используем filter для создания массива с вегетарианскими блюдами
+const vegetarianDishes = dishes.filter(dish => 
+    dish.ingredients.every(ingredient => !nonVegetarianIngredients.includes(ingredient))
+);
 
 // Выводим результат
 console.log("Вегетарианские блюда:", vegetarianDishes);
